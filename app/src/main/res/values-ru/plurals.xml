@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <plurals name="likes">
+        <item quantity="one">%d лайк</item>
+        <item quantity="few">%d лайка</item>
+        <item quantity="many">%d лайков</item>
+        <item quantity="other">%d лайков</item>
+    </plurals>
+
+    <plurals name="reposts">
+        <item quantity="one">%d репост</item>
+        <item quantity="few">%d репоста</item>
+        <item quantity="many">%d репостов</item>
+        <item quantity="other">%d репостов</item>
+    </plurals>
+
+    <plurals name="comments">
+        <item quantity="one">%d комментарий</item>
+        <item quantity="few">%d комментария</item>
+        <item quantity="many">%d комментариев</item>
+        <item quantity="other">%d комментариев</item>
+    </plurals>
+
+</resources>
