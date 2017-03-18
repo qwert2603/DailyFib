@@ -32,23 +32,30 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        loading_FrameLayout.setVisible(true)
         posts_RecyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
         posts_RecyclerView.layoutManager = layoutManager
         posts_RecyclerView.adapter = adapter
         posts_RecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
                 if (loading_FrameLayout.visibility != View.VISIBLE && !allPostsLoaded && layoutManager.findLastVisibleItemPosition() == adapter.itemCount - 1) {
-                    loadPosts()
+                    loadPosts(false)
                 }
             }
         })
 
-        loadPosts()
+        posts_SwipeRefreshLayout.setOnRefreshListener { loadPosts(true) }
+
+        loadPosts(false)
     }
 
-    private fun loadPosts() {
+    private fun loadPosts(reloadAll: Boolean) {
+        if (!reloadAll && allPostsLoaded) return
+
         loading_FrameLayout.setVisible(true)
+        if (reloadAll) {
+            adapter.posts = emptyList()
+            allPostsLoaded = false
+        }
         val disposable = dataManager.getPosts(adapter.posts.size)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -57,10 +64,12 @@ class MainActivity : AppCompatActivity() {
                         allPostsLoaded = it.response.isEmpty()
                         adapter.posts += it.response
                         loading_FrameLayout.setVisible(false)
+                        posts_SwipeRefreshLayout.isRefreshing = false
                     }
                     throwable?.let {
                         LogUtils.e("error loading posts!!!", it)
                         Toast.makeText(this@MainActivity, it.toString(), Toast.LENGTH_LONG).show()
+                        posts_SwipeRefreshLayout.isRefreshing = false
                     }
                 }
         compositeDisposable.add(disposable)
