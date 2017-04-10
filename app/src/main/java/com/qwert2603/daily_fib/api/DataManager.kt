@@ -32,8 +32,17 @@ class DataManager {
             .map { (count, items) ->
                 loadedCount = 0
                 items
-                        .mapIndexed { index, (id, text, date, comments, likes, reposts, views) ->
-                            PostItem(id, text, date, comments.count, likes.count, reposts.count, views.count, count - loadedCount - index)
+                        .mapIndexed { index, post ->
+                            PostItem(
+                                    post.id,
+                                    post.text,
+                                    post.date,
+                                    post.comments.count,
+                                    post.likes.count,
+                                    post.reposts.count,
+                                    post.views?.count ?: 0,
+                                    count - loadedCount - index
+                            )
                         }
             }
             .subscribeOn(Schedulers.io())
@@ -44,8 +53,17 @@ class DataManager {
             .map { it.response }
             .map { (count, items) ->
                 items
-                        .mapIndexed { index, (id, text, date, comments, likes, reposts, views) ->
-                            PostItem(id, text, date, comments.count, likes.count, reposts.count, views.count, count - loadedCount - index)
+                        .mapIndexed { index, post ->
+                            PostItem(
+                                    post.id,
+                                    post.text,
+                                    post.date,
+                                    post.comments.count,
+                                    post.likes.count,
+                                    post.reposts.count,
+                                    post.views?.count ?: 0,
+                                    count - loadedCount - index
+                            )
                         }
             }
             .subscribeOn(Schedulers.io())

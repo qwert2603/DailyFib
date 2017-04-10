@@ -9,8 +9,8 @@ android {
         applicationId "com.qwert2603.daily_fib"
         minSdkVersion 17
         targetSdkVersion 25
-        versionCode 3
-        versionName "1.2"
+        versionCode 4
+        versionName "1.2.1"
     }
     buildTypes {
         release {

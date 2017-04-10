@@ -16,7 +16,7 @@ data class Post(
         val comments: Count,
         val likes: Count,
         val reposts: Count,
-        val views: Count
+        val views: Count?
 )
 
 data class Count(val count: Int)

@@ -53,6 +53,8 @@ class MainActivity : MviActivity<MainActivityView, MainActivityPresenter>(), Mai
 
     override fun closeComments() = itemsAdapter.closeCommentsObservable
 
+    private var refreshing = false
+
     override fun render(mainActivityViewState: MainActivityViewState) {
 //    todo    TransitionManager.beginDelayedTransition(swipeRefreshLayout)
         progressBar.setVisible(mainActivityViewState.firstPageLoading)
@@ -61,6 +63,12 @@ class MainActivity : MviActivity<MainActivityView, MainActivityPresenter>(), Mai
         mainActivityViewState.items?.let { itemsAdapter.items = it }
         swipeRefreshLayout.isRefreshing = mainActivityViewState.refreshLoading
         mainActivityViewState.refreshError?.let { Toast.makeText(this, R.string.refresh_error_text, Toast.LENGTH_SHORT).show() }
+
+        if (refreshing && !mainActivityViewState.refreshLoading && mainActivityViewState.refreshError == null) {
+            items_RecyclerView.smoothScrollToPosition(0)
+        }
+
+        refreshing = mainActivityViewState.refreshLoading
 
         mainActivityViewState.firstPageError?.let { LogUtils.e("firstPageError", it) }
         mainActivityViewState.nextPageError?.let { LogUtils.e("nextPageError", it) }
