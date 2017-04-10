@@ -25,7 +25,7 @@ class DataManager {
             .build()
             .create(Rest::class.java)
 
-    private var loadedCount = 0
+    private var loadedCount = 0//todo: to separated class
 
     fun loadNewestPosts(): Single<List<PostItem>> = rest.getPosts(0)
             .map { it.response }

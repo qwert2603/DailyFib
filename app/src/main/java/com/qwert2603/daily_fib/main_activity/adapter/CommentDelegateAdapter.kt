@@ -25,6 +25,7 @@ class CommentDelegateAdapter : DelegateAdapter<CommentItem, CommentVH> {
 
 class CommentVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(commentItem: CommentItem) = with(itemView) {
+        // todo: commentItem.date
         val stb = SpannableStringBuilder("${commentItem.author.name} ${commentItem.text}")
         stb.setSpan(StyleSpan(Typeface.BOLD), 0, commentItem.author.name.length, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
         textComment_TextView.text = stb

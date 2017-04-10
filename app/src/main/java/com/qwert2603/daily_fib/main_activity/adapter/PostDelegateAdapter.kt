@@ -36,6 +36,7 @@ class PostVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
     }
 
     fun bind(postItem: PostItem) = with(itemView) {
+        // todo: postItem.date
         this@PostVH.postItem = postItem
         text_TextView.text = postItem.text
         number_TextView.text = "#${postItem.number}"

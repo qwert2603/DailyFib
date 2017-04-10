@@ -36,7 +36,7 @@ class MainActivity : MviActivity<MainActivityView, MainActivityPresenter>(), Mai
         items_RecyclerView.recycledViewPool.setMaxRecycledViews(Item.VIEW_TYPE_LOADING_COMMENTS, 20)
     }
 
-    override fun createPresenter() = MainActivityPresenter()
+    override fun createPresenter() = MainActivityPresenter()//todo: Dagger
 
     override fun loadFirstPage(): Observable<Any> = Observable.just(Any())
 
@@ -54,7 +54,7 @@ class MainActivity : MviActivity<MainActivityView, MainActivityPresenter>(), Mai
     override fun closeComments() = itemsAdapter.closeCommentsObservable
 
     override fun render(mainActivityViewState: MainActivityViewState) {
-//        TransitionManager.beginDelayedTransition(swipeRefreshLayout)
+//    todo    TransitionManager.beginDelayedTransition(swipeRefreshLayout)
         progressBar.setVisible(mainActivityViewState.firstPageLoading)
         error_TextView.setVisible(mainActivityViewState.firstPageError != null)
         items_RecyclerView.setVisible(mainActivityViewState.items != null)
