@@ -24,6 +24,7 @@ interface Rest {
     fun getComments(
             @Query("post_id") post_id: Int,
             @Query("offset") offset: Int = 0,
+            @Query("count") count: Int = 100,
             @Query("owner_id") owner_id: Int = -141511386,
             @Query("extended") extended: Int = 1,
             @Query("access_token") access_token: String = TOKEN,
