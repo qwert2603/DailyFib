@@ -9,12 +9,13 @@ android {
         applicationId "com.qwert2603.daily_fib"
         minSdkVersion 17
         targetSdkVersion 25
-        versionCode 4
-        versionName "1.2.1"
+        versionCode 5
+        versionName "1.2.2"
     }
     buildTypes {
         release {
-            minifyEnabled false
+            shrinkResources true
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -24,7 +25,7 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
     ext.support_version = '25.4.0'
-    ext.retrofit_version = '2.2.0'
+    ext.retrofit_version = '2.3.0'
     ext.okhttp_version = '3.8.0'
     ext.rxbinding_version = '2.0.0'
 

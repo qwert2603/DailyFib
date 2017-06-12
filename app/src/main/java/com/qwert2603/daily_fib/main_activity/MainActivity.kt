@@ -70,8 +70,13 @@ class MainActivity : MviActivity<MainActivityView, MainActivityPresenter>(), Mai
 
         refreshing = mainActivityViewState.refreshLoading
 
-        mainActivityViewState.firstPageError?.let { LogUtils.e("firstPageError", it) }
-        mainActivityViewState.nextPageError?.let { LogUtils.e("nextPageError", it) }
-        mainActivityViewState.refreshError?.let { LogUtils.e("refreshError", it) }
+        mainActivityViewState.firstPageError?.logError("firstPageError")
+        mainActivityViewState.nextPageError?.logError("nextPageError")
+        mainActivityViewState.refreshError?.logError("refreshError")
+    }
+
+    fun Throwable.logError(msg: String) {
+        LogUtils.e(msg, this)
+        //Toast.makeText(this@MainActivity, this.toString(), Toast.LENGTH_LONG).show()
     }
 }
