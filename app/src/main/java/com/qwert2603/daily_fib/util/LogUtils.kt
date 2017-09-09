@@ -1,4 +1,4 @@
-package com.atconsulting.strizhi.util
+package com.qwert2603.daily_fib.util
 
 import android.util.Log
 

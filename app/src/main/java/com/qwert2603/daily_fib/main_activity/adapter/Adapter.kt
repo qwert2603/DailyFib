@@ -23,11 +23,8 @@ class ItemsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             field = value
             DiffUtil.calculateDiff(object : DiffUtil.Callback() {
                 override fun getOldListSize() = prev.size
-
                 override fun getNewListSize() = field.size
-
                 override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int) = prev[oldItemPosition].id == field[newItemPosition].id
-
                 override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int) = prev[oldItemPosition] == field[newItemPosition]
             }).dispatchUpdatesTo(this)
         }

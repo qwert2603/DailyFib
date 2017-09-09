@@ -1,9 +1,9 @@
 package com.qwert2603.daily_fib.api
 
-import com.atconsulting.strizhi.util.LogUtils
 import com.qwert2603.daily_fib.main_activity.CommentAuthor
 import com.qwert2603.daily_fib.main_activity.CommentItem
 import com.qwert2603.daily_fib.main_activity.PostItem
+import com.qwert2603.daily_fib.util.LogUtils
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -15,7 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class DataManager {
 
-    val rest: Rest = Retrofit.Builder()
+    private val rest: Rest = Retrofit.Builder()
             .client(OkHttpClient.Builder()
                     .addInterceptor(HttpLoggingInterceptor(HttpLoggingInterceptor.Logger { LogUtils.d(it) }).setLevel(HttpLoggingInterceptor.Level.BODY))
                     .build())

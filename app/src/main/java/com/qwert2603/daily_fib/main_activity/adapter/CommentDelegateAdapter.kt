@@ -14,9 +14,7 @@ import com.qwert2603.daily_fib.util.inflate
 import kotlinx.android.synthetic.main.item_comment.view.*
 
 class CommentDelegateAdapter : DelegateAdapter<CommentItem, CommentVH> {
-    override fun createVH(parent: ViewGroup): CommentVH {
-        return CommentVH(parent.inflate(R.layout.item_comment))
-    }
+    override fun createVH(parent: ViewGroup) = CommentVH(parent.inflate(R.layout.item_comment))
 
     override fun bind(viewHolder: CommentVH, item: CommentItem) {
         viewHolder.bind(item)

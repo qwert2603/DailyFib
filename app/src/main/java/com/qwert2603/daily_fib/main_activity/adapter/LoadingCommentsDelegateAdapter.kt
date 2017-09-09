@@ -4,7 +4,7 @@ import android.support.transition.TransitionManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
-import com.atconsulting.strizhi.util.LogUtils
+import com.qwert2603.daily_fib.util.LogUtils
 import com.qwert2603.daily_fib.R
 import com.qwert2603.daily_fib.main_activity.LoadingCommentsItem
 import com.qwert2603.daily_fib.util.inflate
@@ -12,9 +12,7 @@ import com.qwert2603.daily_fib.util.setVisible
 import kotlinx.android.synthetic.main.item_loading.view.*
 
 class LoadingCommentsDelegateAdapter : DelegateAdapter<LoadingCommentsItem, LoadingCommentsVH> {
-    override fun createVH(parent: ViewGroup): LoadingCommentsVH {
-        return LoadingCommentsVH(parent.inflate(R.layout.item_loading))
-    }
+    override fun createVH(parent: ViewGroup) = LoadingCommentsVH(parent.inflate(R.layout.item_loading))
 
     override fun bind(viewHolder: LoadingCommentsVH, item: LoadingCommentsItem) {
         viewHolder.bind(item)

@@ -1,16 +1,17 @@
 package com.qwert2603.daily_fib.main_activity
 
 import android.os.Bundle
+import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.widget.Toast
-import com.atconsulting.strizhi.util.LogUtils
 import com.hannesdorfmann.mosby3.mvi.MviActivity
 import com.jakewharton.rxbinding2.support.v4.widget.RxSwipeRefreshLayout
 import com.jakewharton.rxbinding2.support.v7.widget.RxRecyclerView
 import com.jakewharton.rxbinding2.view.RxView
 import com.qwert2603.daily_fib.R
 import com.qwert2603.daily_fib.main_activity.adapter.ItemsAdapter
+import com.qwert2603.daily_fib.util.LogUtils
 import com.qwert2603.daily_fib.util.setVisible
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity_main.*
@@ -20,9 +21,16 @@ class MainActivity : MviActivity<MainActivityView, MainActivityPresenter>(), Mai
     private lateinit var layoutManager: LinearLayoutManager
     private lateinit var itemsAdapter: ItemsAdapter
 
+    private var nextPageLoading = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        swipeRefreshLayout.setColorSchemeColors(
+                ResourcesCompat.getColor(resources, R.color.colorAccent, null),
+                ResourcesCompat.getColor(resources, R.color.colorPrimary, null)
+        )
 
         layoutManager = LinearLayoutManager(this)
         itemsAdapter = ItemsAdapter()
@@ -43,8 +51,9 @@ class MainActivity : MviActivity<MainActivityView, MainActivityPresenter>(), Mai
     override fun reloadFirstPage(): Observable<Any> = RxView.clicks(error_TextView)
 
     override fun loadNextPage(): Observable<Any> = RxRecyclerView.scrollStateChanges(items_RecyclerView)
+            .filter { !nextPageLoading }
             .filter { it == RecyclerView.SCROLL_STATE_IDLE }
-            .filter { layoutManager.findLastVisibleItemPosition() == itemsAdapter.itemCount - 1 }
+            .filter { layoutManager.findLastVisibleItemPosition() > itemsAdapter.itemCount - 3 }
             .map { Any() }
 
     override fun refresh(): Observable<Any> = RxSwipeRefreshLayout.refreshes(swipeRefreshLayout)
@@ -70,12 +79,14 @@ class MainActivity : MviActivity<MainActivityView, MainActivityPresenter>(), Mai
 
         refreshing = mainActivityViewState.refreshLoading
 
+        nextPageLoading = mainActivityViewState.nextPageLoading
+
         mainActivityViewState.firstPageError?.logError("firstPageError")
         mainActivityViewState.nextPageError?.logError("nextPageError")
         mainActivityViewState.refreshError?.logError("refreshError")
     }
 
-    fun Throwable.logError(msg: String) {
+    private fun Throwable.logError(msg: String) {
         LogUtils.e(msg, this)
         //Toast.makeText(this@MainActivity, this.toString(), Toast.LENGTH_LONG).show()
     }

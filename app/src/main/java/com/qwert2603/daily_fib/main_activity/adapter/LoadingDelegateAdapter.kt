@@ -11,9 +11,7 @@ import com.qwert2603.daily_fib.util.setVisible
 import kotlinx.android.synthetic.main.item_loading.view.*
 
 class LoadingDelegateAdapter : DelegateAdapter<LoadingItem, LoadingVH> {
-    override fun createVH(parent: ViewGroup): LoadingVH {
-        return LoadingVH(parent.inflate(R.layout.item_loading))
-    }
+    override fun createVH(parent: ViewGroup) = LoadingVH(parent.inflate(R.layout.item_loading))
 
     override fun bind(viewHolder: LoadingVH, item: LoadingItem) {
         viewHolder.bind(item)

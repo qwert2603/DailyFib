@@ -6,7 +6,6 @@
     android:orientation="vertical"
     android:padding="8dp">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,10 +14,12 @@
         <TextView
             android:id="@+id/text_TextView"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="22dp"
             android:layout_margin="4dp"
             android:layout_weight="1"
-            android:text="6.557.470.319.842"
+            android:ellipsize="end"
+            android:lines="1"
+            android:text="6.557.470.319.842.470.319.842.470.319.842"
             android:textColor="@android:color/black"
             android:textSize="18sp"
             android:textStyle="bold" />

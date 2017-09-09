@@ -2,11 +2,12 @@ package com.qwert2603.daily_fib.main_activity
 
 import com.hannesdorfmann.mosby3.mvi.MviBasePresenter
 import com.qwert2603.daily_fib.api.DataManager
+import com.qwert2603.daily_fib.util.LogUtils
 import io.reactivex.Observable
 
 class MainActivityPresenter : MviBasePresenter<MainActivityView, MainActivityViewState>() {
 
-    val dataManager = DataManager()
+    private val dataManager = DataManager()
 
     override fun bindIntents() {
         val observable = Observable.merge<PartialStateChanges>(listOf(
@@ -62,7 +63,8 @@ class MainActivityPresenter : MviBasePresenter<MainActivityView, MainActivityVie
         subscribeViewState(observable.scan(initialValue, this::viewStateReducer), MainActivityView::render)
     }
 
-    fun viewStateReducer(viewState: MainActivityViewState, changes: PartialStateChanges): MainActivityViewState {
+    private fun viewStateReducer(viewState: MainActivityViewState, changes: PartialStateChanges): MainActivityViewState {
+        LogUtils.d("viewStateReducer $changes")
         return when (changes) {
             is PartialStateChanges.FirstPageLoading -> viewState.copy(
                     firstPageLoading = true,
@@ -120,7 +122,7 @@ class MainActivityPresenter : MviBasePresenter<MainActivityView, MainActivityVie
         }
     }
 
-    fun List<Item>.setCommentItems(postId: Long, commentItems: List<Item>): List<Item> {
+    private fun List<Item>.setCommentItems(postId: Long, commentItems: List<Item>): List<Item> {
         val postIndex = indexOfFirst { (it as? PostItem)?.id == postId }
         if (postIndex < 0) return this
         var nextPostIndex = subList(postIndex + 1, size).indexOfFirst { it is PostItem }
