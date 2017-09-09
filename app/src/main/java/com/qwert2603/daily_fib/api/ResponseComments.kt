@@ -15,7 +15,16 @@ data class Comment(
         val id: Long,
         val from_id: Long,
         val text: String,
-        val date: Long
+        val date: Long,
+        val attachments: List<Attachment>?
+)
+
+data class Attachment(
+        val photo: Photo?
+)
+
+data class Photo(
+        val photo_604: String
 )
 
 data class Profile(

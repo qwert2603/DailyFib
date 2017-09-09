@@ -77,7 +77,15 @@ class DataManager {
                 val profiles = response.profiles.map { CommentAuthor(it.id, "${it.first_name} ${it.last_name}", it.photo_100) }
                 val groups = response.groups.map { CommentAuthor(-1 * it.id, it.name, it.photo_100) }
                 (profiles + groups).forEach { authors.put(it.id, it) }
-                response.items.map { CommentItem(it.id, authors[it.from_id]!!, it.text, it.date) }
+                response.items.map {
+                    CommentItem(
+                            id = it.id,
+                            author = authors[it.from_id]!!,
+                            text = it.text,
+                            date = it.date,
+                            photos = it.attachments?.mapNotNull { it.photo }?.map { it.photo_604 } ?: emptyList()
+                    )
+                }
             }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

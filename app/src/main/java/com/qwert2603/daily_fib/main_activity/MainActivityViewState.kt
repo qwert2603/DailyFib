@@ -41,7 +41,8 @@ data class CommentItem(
         override val id: Long,
         val author: CommentAuthor,
         val text: String,
-        val date: Long
+        val date: Long,
+        val photos: List<String>
 ) : Item {
     override val viewType = Item.VIEW_TYPE_COMMENT
 }
