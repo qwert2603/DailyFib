@@ -1,6 +1,7 @@
 package com.qwert2603.daily_fib.main_activity.adapter
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.support.v4.widget.TextViewCompat
 import android.support.v7.widget.RecyclerView
 import android.util.TypedValue
@@ -23,11 +24,19 @@ class PostDelegateAdapter : DelegateAdapter<PostItem, PostVH> {
 class PostVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     var clickListener: ((PostItem) -> Unit)? = null
-    lateinit var postItem: PostItem
+    private lateinit var postItem: PostItem
 
     init {
         TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(itemView.text_TextView, 8, 18, 1, TypedValue.COMPLEX_UNIT_SP)
         itemView.setOnClickListener { clickListener?.invoke(postItem) }
+        itemView.setOnLongClickListener {
+            Intent(Intent.ACTION_SEND)
+                    .also { it.putExtra(Intent.EXTRA_TEXT, "#${postItem.number} ${postItem.text} https://vk.com/daily_fib") }
+                    .also { it.type = "text/plain" }
+                    .let { Intent.createChooser(it, itemView.context.getString(R.string.share_title)) }
+                    .apply { itemView.context.startActivity(this) }
+            true
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -39,7 +48,7 @@ class PostVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(postItem: PostItem) = with(itemView) {
         // todo: postItem.date
         this@PostVH.postItem = postItem
-        text_TextView.text = postItem.text.filter { it != '\n' && !it.isWhitespace() }
+        text_TextView.text = postItem.text
         number_TextView.text = "#${postItem.number}"
         likes_TextView.plurals(postItem.likes, 'L')
         reposts_TextView.plurals(postItem.reposts, 'R')

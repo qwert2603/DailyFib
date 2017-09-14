@@ -35,7 +35,7 @@ class DataManager {
                         .mapIndexed { index, post ->
                             PostItem(
                                     post.id,
-                                    post.text,
+                                    post.text.filter { it != '\n' && !it.isWhitespace() },
                                     post.date,
                                     post.comments.count,
                                     post.likes.count,
@@ -56,7 +56,7 @@ class DataManager {
                         .mapIndexed { index, post ->
                             PostItem(
                                     post.id,
-                                    post.text,
+                                    post.text.filter { it != '\n' && !it.isWhitespace() },
                                     post.date,
                                     post.comments.count,
                                     post.likes.count,
