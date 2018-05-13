@@ -65,7 +65,6 @@ class MainActivity : MviActivity<MainActivityView, MainActivityPresenter>(), Mai
     private var refreshing = false
 
     override fun render(mainActivityViewState: MainActivityViewState) {
-//    todo    TransitionManager.beginDelayedTransition(swipeRefreshLayout)
         progressBar.setVisible(mainActivityViewState.firstPageLoading)
         error_TextView.setVisible(mainActivityViewState.firstPageError != null)
         items_RecyclerView.setVisible(mainActivityViewState.items != null)
