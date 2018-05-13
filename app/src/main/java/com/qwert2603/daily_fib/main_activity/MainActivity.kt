@@ -1,6 +1,7 @@
 package com.qwert2603.daily_fib.main_activity
 
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -42,6 +43,12 @@ class MainActivity : MviActivity<MainActivityView, MainActivityPresenter>(), Mai
         items_RecyclerView.recycledViewPool.setMaxRecycledViews(Item.VIEW_TYPE_NO_COMMENTS, 20)
         items_RecyclerView.recycledViewPool.setMaxRecycledViews(Item.VIEW_TYPE_LOADING, 20)
         items_RecyclerView.recycledViewPool.setMaxRecycledViews(Item.VIEW_TYPE_LOADING_COMMENTS, 20)
+
+        if (resources.getBoolean(R.bool.is_french)) {
+            swipeRefreshLayout.postDelayed({
+                swipeRefreshLayout?.let { Snackbar.make(it, R.string.text_qua, Snackbar.LENGTH_SHORT).show() }
+            }, 2000)
+        }
     }
 
     override fun createPresenter() = MainActivityPresenter()//todo: Dagger

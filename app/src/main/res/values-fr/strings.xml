@@ -1,0 +1,9 @@
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="fr">
+    <string name="app_name">Fibonacci tous les jours</string>
+    <string name="error_text">bug!\nrecharger?</string>
+    <string name="refresh_error_text">erreur pendant la mise à jour!</string>
+    <string name="no_comments_text">sans commentaire</string>
+    <string name="share_title">envoyer Fibonacci partout!</string>
+
+    <bool name="is_french">true</bool>
+</resources>

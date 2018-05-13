@@ -1,0 +1,7 @@
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="ru">
+    <string name="app_name">Фибоначчи каждый день</string>
+    <string name="error_text">ошибка!\nзагрузим все заново?</string>
+    <string name="refresh_error_text">ошибка обновления!</string>
+    <string name="no_comments_text">без комментариев</string>
+    <string name="share_title">Фибоначь везде!</string>
+</resources>
