@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?attr/selectableItemBackground"
@@ -19,18 +20,18 @@
             android:layout_weight="1"
             android:ellipsize="end"
             android:lines="1"
-            android:text="6.557.470.319.842.470.319.842.470.319.842"
             android:textColor="@android:color/black"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:text="6.557.470.319.842.470.319.842.470.319.842" />
 
         <TextView
             android:id="@+id/number_TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="#42"
-            android:textColor="#999999" />
+            android:textColor="#999999"
+            tools:text="#42" />
 
     </LinearLayout>
 
@@ -42,22 +43,22 @@
         <TextView
             android:id="@+id/likes_TextView"
             style="@style/postButton"
-            android:text="12 L" />
+            tools:text="12 L" />
 
         <TextView
             android:id="@+id/reposts_TextView"
             style="@style/postButton"
-            android:text="2 R" />
+            tools:text="2 R" />
 
         <TextView
             android:id="@+id/views_TextView"
             style="@style/postButton"
-            android:text="243 V" />
+            tools:text="243 V" />
 
         <TextView
             android:id="@+id/comments_TextView"
             style="@style/postButton"
-            android:text="5 C" />
+            tools:text="5 C" />
 
     </LinearLayout>
 

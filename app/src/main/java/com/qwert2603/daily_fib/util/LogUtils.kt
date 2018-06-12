@@ -1,6 +1,7 @@
 package com.qwert2603.daily_fib.util
 
 import android.util.Log
+import com.qwert2603.daily_fib.BuildConfig
 
 object LogUtils {
 
@@ -12,16 +13,11 @@ object LogUtils {
     }
 
     fun d(tag: String, s: String) {
-        Log.d(tag, s)
+        if (BuildConfig.DEBUG) Log.d(tag, s)
     }
 
     @JvmOverloads
     fun e(s: String = ERROR_MSG, t: Throwable? = null) {
-        Log.e(APP_TAG, s, t)
+        if (BuildConfig.DEBUG) Log.e(APP_TAG, s, t)
     }
-
-    fun printCurrentStack() {
-        Log.v(APP_TAG, "", Exception())
-    }
-
 }
