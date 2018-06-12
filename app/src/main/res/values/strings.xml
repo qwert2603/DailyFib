@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="en">
+<resources>
     <string name="app_name">Daily Fibonacci</string>
     <string name="error_text">error!\nreload?</string>
     <string name="refresh_error_text">refresh error!</string>
