@@ -8,8 +8,10 @@ android {
         applicationId "com.qwert2603.daily_fib"
         minSdkVersion 21
         targetSdkVersion 27
-        versionCode 7
-        versionName "1.4"
+        versionCode 8
+        versionName "1.5"
+
+        buildConfigField 'String', "API_TOKEN", daily_fib_key
     }
     buildTypes {
         debug {
@@ -43,8 +45,6 @@ dependencies {
     compile "com.jakewharton.rxbinding2:rxbinding-design:$rxbinding_version"
     compile "com.jakewharton.rxbinding2:rxbinding-appcompat-v7:$rxbinding_version"
     compile "com.jakewharton.rxbinding2:rxbinding-support-v4:$rxbinding_version"
-
-    compile 'com.google.code.gson:gson:2.8.4'
 
     compile "com.squareup.retrofit2:retrofit:$retrofit_version"
     compile "com.squareup.retrofit2:converter-gson:$retrofit_version"
